@@ -43,4 +43,7 @@ npm start
       Under "Get Started" click on "Open a project or solution"
       Go to the folder where you extracted the repo and click on the eCommerceProject.sln file
 
-   
+
+# Preview of Home Page
+<img width="463" alt="image" src="https://github.com/user-attachments/assets/1e784955-a2b7-48c9-bf59-175156f1eece" />
+
