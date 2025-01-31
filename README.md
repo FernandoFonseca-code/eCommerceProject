@@ -29,7 +29,7 @@ cd eCommerceProject
 To run the project, use the appropriate command for your setup. For example:
 
 ```sh
-npm start
+dotnet run
 ```
 
 ### If you are not confortable with CLI you can 
