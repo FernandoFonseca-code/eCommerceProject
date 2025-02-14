@@ -1,6 +1,13 @@
+using eCommerceProject.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add services to the container
+builder.Services.AddDbContext<CraftContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
