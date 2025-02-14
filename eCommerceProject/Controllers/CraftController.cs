@@ -20,13 +20,16 @@ namespace eCommerceProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Craft craft)
+        /// <summary>
+        /// For async code information see:
+        /// https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/intro?view=aspnetcore-9.0#asynchronous-code
+        public async Task<IActionResult> Create(Craft craft)
         {
             if (ModelState.IsValid)
             {
                 // add to Db
-                _context.Crafts.Add(craft); // Prepares Insert
-                _context.SaveChanges(); // Execute pending Insert
+                _context.Crafts.Add(craft);         // Prepares Insert
+                await _context.SaveChangesAsync(); // Execute pending Insert
 
                 // Show success message on page
                 // This creates a message object to be able to be used in the view page
