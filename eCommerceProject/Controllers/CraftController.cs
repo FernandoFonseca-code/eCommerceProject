@@ -78,6 +78,7 @@ namespace eCommerceProject.Controllers
             {
                 _context.Crafts.Update(craftModel);
                 await _context.SaveChangesAsync();
+                TempData["Message"] = $"{craftModel.Title} was updated successfully";
                 return RedirectToAction("Index");
             }
             return View(craftModel);
