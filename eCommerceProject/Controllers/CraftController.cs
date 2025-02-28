@@ -9,7 +9,7 @@ namespace eCommerceProject.Controllers
     {
         private readonly CraftContext _context;
 
-        public CraftController (CraftContext context)
+        public CraftController(CraftContext context)
         {
             _context = context;
         }
@@ -51,6 +51,22 @@ namespace eCommerceProject.Controllers
                 return View();
             }
             return View(craft);
+        }
+        /// <summary>
+        /// This is pulling the id from the URL that the user clicked on and displaying
+        /// the edit page with the craft that was selected
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> Edit(int id)
+        {
+            Craft? crafToEdit = await _context.Crafts.FindAsync(id);
+            if (crafToEdit == null)
+            {
+                /// NotFound is a built in method that returns a 404 error
+                return NotFound();
+            }
+            return View(crafToEdit);
         }
 
     }
