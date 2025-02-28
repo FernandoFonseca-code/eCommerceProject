@@ -22,7 +22,7 @@ public class Craft
     /// The sales price of the craft
     /// </summary>
     [Range(0.01, 500)]
-    public double Price { get; set; }
+    public decimal Price { get; set; }
 
     // TODO: Add Category
 }
