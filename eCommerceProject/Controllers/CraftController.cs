@@ -1,6 +1,7 @@
 ﻿using eCommerceProject.Data;
 using eCommerceProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerceProject.Controllers
 {
@@ -11,6 +12,19 @@ namespace eCommerceProject.Controllers
         public CraftController (CraftContext context)
         {
             _context = context;
+        }
+        /// <summary>
+        /// Shows all crafts using asyncronous code
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            // Get all crafts from Db
+            List<Craft> crafts = await _context.Crafts.ToListAsync();
+            // Show them on page
+            //return View(_context.Crafts.ToList());
+            return View(crafts);
         }
 
         [HttpGet]
