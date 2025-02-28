@@ -52,9 +52,11 @@ namespace eCommerceProject.Controllers
             }
             return View(craft);
         }
+
+        [HttpGet]
         /// <summary>
         /// This is pulling the id from the URL that the user clicked on and displaying
-        /// the edit page with the craft that was selected
+        /// the edit page with the craftModel that was selected
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -67,6 +69,18 @@ namespace eCommerceProject.Controllers
                 return NotFound();
             }
             return View(crafToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Craft craftModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Crafts.Update(craftModel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(craftModel);
         }
 
     }
