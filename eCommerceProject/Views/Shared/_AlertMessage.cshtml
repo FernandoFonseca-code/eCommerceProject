@@ -1,0 +1,12 @@
+﻿@* This model takes in a string Message and string AlertType defined in the View and 
+    displays the message in a Bootstrap alert with the appropriate alert type. 
+*@
+@model (string Message, string AlertType)
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-@Model.AlertType alert-dismissible fade show" role="alert">
+        @Model.Message
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
