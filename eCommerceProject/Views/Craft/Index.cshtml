@@ -2,17 +2,23 @@
 
 @{
     ViewData["Title"] = "Craft Catalog";
+    var alertMessage = TempData["Message"]?.ToString();
+    var errorMessage = TempData["ErrorMessage"]?.ToString();
 }
 
 <h1>Catalog</h1>
-@if (TempData["Message"] != null) 
+@* This moves the AlertMessages to the Shared/_AlertMessage file to handle various formatting.
+    This is a good example of how to use partials to keep your code DRY.
+*@
+@if (alertMessage != null)
 {
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["Message"]
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <partial name="_AlertMessage" model="@(alertMessage, "success")" />
 }
 
+@if (errorMessage != null)
+{
+    <partial name="_AlertMessage" model="@(errorMessage, "danger")" />
+}
 <p>
     <a asp-action="Create" asp-controller="Craft">Create a Craft</a>
 </p>
