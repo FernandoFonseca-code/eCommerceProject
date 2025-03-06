@@ -96,7 +96,7 @@ public class CraftController : Controller
         return View(craftToDelete);
     }
     /// <summary>
-    /// This is the post method for deleting a craft. It is called when the user clicks the delete button.
+    /// This is the post method for deleting a craftDetails. It is called when the user clicks the delete button.
     /// It has an Action name of Delete to differentiate it from the get method because in C# you can't 
     /// have two methods with the same name and parameter.
     /// </summary>
@@ -115,7 +115,17 @@ public class CraftController : Controller
             return RedirectToAction("Index");
         }
         
-        TempData["ErrorMessage"] = "This craft was already deleted";
+        TempData["ErrorMessage"] = "This craftDetails was already deleted";
         return RedirectToAction("Index");
+    }
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        Craft? craftDetails = await _context.Crafts.FindAsync(id);
+        if (craftDetails == null)
+        {
+            return NotFound();
+        }
+        return View(craftDetails);
     }
 }
