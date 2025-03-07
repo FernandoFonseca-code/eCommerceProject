@@ -7,11 +7,15 @@ public class Member
 {
     [Key]
     public int MemberId { get; set; }
-
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public string PhoneNumber { get; set; }
-    public string UserName { get; set; }
+    /// <summary>
+    /// Email address of the member is set to null 
+    /// with an exclamation mark to indicate that it will be updated later.
+    ///  ! = null-forgiving operator
+    /// </summary>
+    public string Email { get; set; } = null!;
+    public string Password { get; set; } = null!;
+    public string? PhoneNumber { get; set; }
+    public string? UserName { get; set; }
 }
 
 public class RegisterViewModel
