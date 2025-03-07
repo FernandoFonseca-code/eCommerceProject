@@ -15,4 +15,6 @@ public class CraftContext : DbContext
     }
 
     public DbSet<Craft> Crafts { get; set; }
+
+    public DbSet<Member> Members { get; set; }
 }
