@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace eCommerceProject.Models;
 
@@ -11,4 +12,27 @@ public class Member
     public string Password { get; set; }
     public string PhoneNumber { get; set; }
     public string UserName { get; set; }
+}
+
+public class RegisterViewModel
+{
+    [Required]
+    [EmailAddress]
+    [StringLength(100)]
+    public string Email { get; set; }
+
+    [Required]
+    [Compare(nameof(Email))]
+    [Display(Name = "Confirm Email")]
+    public string ConfirmEmail { get; set; }
+
+    [Required]
+    [PasswordPropertyText]
+    [StringLength(75, MinimumLength = 6)]
+    public string Password { get; set; }
+
+    [Required]
+    [Compare(nameof(Password))]
+    [Display(Name = "Confirm Password")]
+    public string ConfirmPassword { get; set; }
 }
