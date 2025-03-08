@@ -66,6 +66,7 @@ public class MembersController : Controller
             /// If the member exists, redirect to the home page
             if (member != null)
             {
+                HttpContext.Session.SetString("Email", loginModel.Email);
                 return RedirectToAction("Index", "Home");
             }
             else
