@@ -14,16 +14,25 @@ public class CraftController : Controller
         _context = context;
     }
     /// <summary>
-    /// Shows all crafts using asyncronous code
+    /// Shows all crafts using asyncronous code. 
     /// </summary>
+    /// <param name="id">Page Number</param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? id)
     {
-        // Get all crafts from Db
-        List<Craft> crafts = await _context.Crafts.ToListAsync();
+        const int NumCraftsToShowPerPage = 3;
+        const int PageOffset = 1;
+        // If id is null, set currentPage to 1, otherwise set it to id
+        // If (id.HasValue) is true, currentPage = id.Value, otherwise currentPage = 1
+        int currentPage = id ?? 1; // Null Coalescing Operator
+
+        // Get all crafts from Db using LINQ query
+        List<Craft> crafts = await _context.Crafts
+                            .Skip(NumCraftsToShowPerPage * (currentPage - PageOffset))
+                            .Take(NumCraftsToShowPerPage)
+                            .ToListAsync();
         // Show them on page
-        //return View(_context.Crafts.ToList());
         return View(crafts);
     }
 
