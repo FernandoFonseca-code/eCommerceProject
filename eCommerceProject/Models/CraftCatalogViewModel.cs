@@ -10,9 +10,9 @@ namespace Models
             LastPage = lastPage;
             CurrentPage = currPage;
         }
-        public IEnumerable<Craft> Crafts { get; private set; }
-        public int LastPage { get; private set; }
+        public IEnumerable<Craft> Crafts { get; set; }
+        public int LastPage { get; set; }
 
-        public int CurrentPage { get; private set; }
+        public int CurrentPage { get; set; }
     }
 }

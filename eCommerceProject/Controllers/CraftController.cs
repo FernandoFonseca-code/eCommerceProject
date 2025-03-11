@@ -98,7 +98,7 @@ public class CraftController : Controller
             _context.Crafts.Update(craftModel);
             await _context.SaveChangesAsync();
             TempData["Message"] = $"{craftModel.Title} was updated successfully";
-            return RedirectToAction("Index");
+            return RedirectToAction("Add");
         }
         return View(craftModel);
     }
@@ -131,11 +131,11 @@ public class CraftController : Controller
             _context.Crafts.Remove(craftToDelete);
             await _context.SaveChangesAsync();
             TempData["Message"] = $"{craftToDelete.Title} was deleted successfully";
-            return RedirectToAction("Index");
+            return RedirectToAction("Add");
         }
         
         TempData["ErrorMessage"] = "This craftDetails was already deleted";
-        return RedirectToAction("Index");
+        return RedirectToAction("Add");
     }
     [HttpGet]
     public async Task<IActionResult> Details(int id)

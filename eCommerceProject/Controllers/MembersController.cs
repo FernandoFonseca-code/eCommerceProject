@@ -36,7 +36,7 @@ public class MembersController : Controller
             await _context.SaveChangesAsync();
             LogUserIn(newMember.Email);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Add", "Home");
         }
 
         return View(regModel);
@@ -68,7 +68,7 @@ public class MembersController : Controller
             if (member != null)
             {
                 LogUserIn(loginModel.Email);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Add", "Home");
             }
             else
             {
@@ -89,6 +89,6 @@ public class MembersController : Controller
     public IActionResult Logout()
     {
         HttpContext.Session.Remove("Email");
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Add", "Home");
     }
 }
