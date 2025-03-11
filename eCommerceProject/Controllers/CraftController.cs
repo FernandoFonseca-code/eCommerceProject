@@ -27,6 +27,13 @@ public class CraftController : Controller
         // If (id.HasValue) is true, currentPage = id.Value, otherwise currentPage = 1
         int currentPage = id ?? 1; // Null Coalescing Operator
 
+        // take the total number of products in the database
+        int totalNumOfProducts = await _context.Crafts.CountAsync();
+        // Calculate the number of pages needed to show all products
+        double maxNumPages = Math.Ceiling(totalNumOfProducts / (double)NumCraftsToShowPerPage);
+        // Rounding pages up, to next whole page number
+        int lastPage = Convert.ToInt32(maxNumPages); 
+
         // Get all crafts from Db using LINQ query
         List<Craft> crafts = await _context.Crafts
                             .Skip(NumCraftsToShowPerPage * (currentPage - PageOffset))
