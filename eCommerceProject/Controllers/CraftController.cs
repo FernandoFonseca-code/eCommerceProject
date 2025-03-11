@@ -2,6 +2,7 @@
 using eCommerceProject.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace eCommerceProject.Controllers;
 
@@ -39,8 +40,10 @@ public class CraftController : Controller
                             .Skip(NumCraftsToShowPerPage * (currentPage - PageOffset))
                             .Take(NumCraftsToShowPerPage)
                             .ToListAsync();
+
+        CraftCatalogViewModel craftCatalogViewModel = new (crafts, lastPage, currentPage);
         // Show them on page
-        return View(crafts);
+        return View(craftCatalogViewModel);
     }
 
     [HttpGet]
