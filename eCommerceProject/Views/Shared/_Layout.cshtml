@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor _httpContext
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,9 +31,30 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Craft" asp-action="Index">Craft Catalog</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Register">Register</a>
-                        </li>
+                        @* This is how you access and check if a user is logged in with a session*@
+                        @{
+                            string? userEmail = _httpContext.HttpContext.Session.GetString("Email");
+                        }
+                        @* Now we can use session state to modify View Layout.
+                        If the user is not logged in, we will display the Register and Log In links.*@
+                        @if (userEmail == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Register">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Login">Log In</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <p class="nav-link text-dark">Hello @userEmail</p>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Members" asp-action="Logout">Log Out</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
