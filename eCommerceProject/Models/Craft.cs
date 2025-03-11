@@ -27,3 +27,14 @@ public class Craft
     // TODO: Add Category
 }
 
+/// <summary>
+/// A single craft that have bee added to the user's shopping cart cookie.
+/// </summary>
+public class CraftCartViewModel
+{
+    public int CraftId { get; set; }
+
+    public string Title { get; set; }
+
+    public double Price { get; set; }
+}
