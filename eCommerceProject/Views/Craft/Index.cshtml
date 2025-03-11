@@ -43,31 +43,31 @@
         </thead>
 
         <tbody>
-        @foreach (Craft item in Model.Crafts) 
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CraftId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
+            @foreach (Craft item in Model.Crafts) 
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CraftId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
                         @* Newer Syntax *@
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.CraftId">Edit</a>
-                    <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.CraftId">Details</a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CraftId">Delete</a>
-   
-                    @* Older Syntax*@
-                    @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
-                    @* @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
-                    @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
-                </td>
-            </tr>
-        }
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.CraftId">Edit</a>
+                        <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.CraftId">Details</a>
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.CraftId">Delete</a>
+
+                        @* Older Syntax*@
+                        @* @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) | *@
+                        @* @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) | *@
+                        @* @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 }
@@ -75,8 +75,25 @@ else
 {
     <h2>There are no crafts for this page.</h2>
 }
-
-@for (int i = 1; i <= Model.LastPage; i++)
-{
-    <a asp-action="Index" asp-route-pageNumber="@i">@i</a>
-})
+@*Resource for styling pagination
+    https://getbootstrap.com/docs/5.3/components/pagination/
+*@
+<nav aria-label="Craft Catalog Pages">
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.LastPage; i++)
+        {
+            if (i == Model.CurrentPage)
+            {
+                <li class="page-item active">
+                    <a class="page-link">@i</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class= "page-link" asp-action="Index" asp-route-id="@i">@i</a>
+                </li>
+            } 
+        }
+    </ul>
+</nav>
